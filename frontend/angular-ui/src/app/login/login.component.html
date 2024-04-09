@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+
+    <div class="card-content center">
+        <span class="card-title">Login page</span>
+        <p><em>{{message}}</em></p>
+    </div>
+
+    <label for="email"> Email: </label>
+    <input id="email" type="text" formControlName="email">
+    <div class="text-danger" *ngIf="loginForm.controls?.['email']?.touched">
+        <span *ngIf="loginForm.controls?.['email']?.errors?.['required']">Email is required</span>
+        <span *ngIf="loginForm.controls?.['email']?.errors?.['email']">Enter a valid email</span>
+    </div>
+
+    <label for="password">Password: </label>
+    <input id="password" type="password" formControlName="password">
+
+    <div class=center>
+        <button type="submit" [disabled]="!loginForm.valid" class="m-1 btn btn-light btn-outline-primary"
+            *ngIf="!auth.isLoggedIn">LOGIN</button>
+
+        <button type="submit" [disabled]="" mat-flat-button color="primary" class="m-1 mat-grey"
+            *ngIf="auth.isLoggedIn">LOG OUT</button>
+    </div>
+
+    <div>
+        <a [routerLink]="'/signup/' ">
+            Not registered yet? Click here to signup.
+        </a>
+    </div>
+
+</form>
